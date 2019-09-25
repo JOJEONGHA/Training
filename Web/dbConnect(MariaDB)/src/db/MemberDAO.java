@@ -24,18 +24,18 @@ public class MemberDAO {
 		try {
             Class.forName(driver);
             con = DriverManager.getConnection(
-                    "jdbc:mariadb://localhost:3306/sample",
+                    "jdbc:mariadb://localhost:3306/member",
                     "root",
                     "1233");
       
             if( con != null ) {
-            	System.out.println("DB 鞝戩啀 靹标车");
+            	System.out.println("DB 立加 己傍");
             }
             
         } catch (ClassNotFoundException e) { 
-        	System.out.println("霌滊澕鞚措矂 搿滊摐 鞁ろ尐");
+        	System.out.println("靛扼捞滚 肺靛 角菩");
         } catch (SQLException e) {
-        	System.out.println("DB 鞝戩啀 鞁ろ尐");
+        	System.out.println("DB 立加 角菩");
             e.printStackTrace();
         }
 	}
