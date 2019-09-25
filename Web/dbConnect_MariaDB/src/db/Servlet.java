@@ -2,7 +2,6 @@ package db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member")
+@WebServlet("/sample")
 public class Servlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,17 +32,13 @@ public class Servlet extends HttpServlet {
 
 		out.print("<html><body>");
 		out.print("<table border = 1><tr align = 'center' bgcolor='lightgreen'>");
-		out.print("<td>아이디</td><td>비밀번호</td><td>이름</td><td>이메일</td><td>가입일</td></tr>");
+		out.print("<td>Number</td><td>Sample<</td></tr>");
 
 		for (int i = 0; i < list.size(); i++) {
 			MemberVO vo = (MemberVO) list.get(i);
-			String id = vo.getId();
-			String pwd = vo.getPwd();
-			String name = vo.getName();
-			String email = vo.getEmail();
-			Date joinDate = vo.getJoinDate();
-			out.print("<tr><td>" + id + "</td><td>" + pwd + "</td><td>" + name + "</td><td>" + email + "</td><td>"
-					+ joinDate + "</td><td>");
+			int num = vo.getNum();
+			String sample = vo.getTitle();
+			out.print("<tr><td>" + num + "</td><td>" + sample + "</td><td>");
 		}
 		out.print("</table></body></html>");
 	}
