@@ -25,46 +25,56 @@ public class Servlet extends HttpServlet {
 	private static String IMAGE_REF0 = "C:\\Users\\MongEe\\Desktop\\working";
 	SampleService service;
 	SampleVO vo;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		service = new SampleService();
 		vo = new SampleVO();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doHandler(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doHandler(request, response);
 	}
-	
-	protected void doHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doHandler(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String nextPage = "";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String action = request.getPathInfo();
 		try {
 			List<SampleVO> list = new ArrayList<>();
-			Map<String,String> SampleMap = upload(request,response);
-			int num = vo.getNum();
-			String sample = vo.getSample();
-			String imageFileName = vo.getImageFileName();
+			if (action == "/" || action == "/list") {
+				Map<String, String> SampleMap = upload(request, response);
+				int num = vo.getNum();
+				String sample = vo.getSample();
+				String imageFileName = vo.getImageFileName();
 
-			vo.setNum(num);
-			vo.setSample(sample);
-			vo.setImageFileName(imageFileName);
-			service.addSample(vo);
-
+				vo.setNum(num);
+				vo.setSample(sample);
+				vo.setImageFileName(imageFileName);
+				service.addSample(vo);
+				nextPage = "";
+			}else if(action == "/" || action == "/list") {
+				
+			}
+			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/upload/sampleList.do");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
-			//TODO: handle exception
+			// TODO: handle exception
 		}
 	}
 
-	protected Map<String,String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected Map<String, String> upload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Map<String, String> SampleMap = new HashMap<String, String>();
 		File currentDirPath = new File(IMAGE_REF0);
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -73,7 +83,7 @@ public class Servlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 
 		try {
-			List items = upload.parseRequest(request);
+			List<FileItem> items = upload.parseRequest(request);
 			for (int i = 0; i < items.size(); i++) {
 				FileItem fileItem = (FileItem) items.get(i);
 				if (fileItem.isFormField()) {
@@ -88,7 +98,7 @@ public class Servlet extends HttpServlet {
 						}
 						String fileName = fileItem.getName().substring(idx + 1);
 						System.out.println("FileName :" + fileName);
-						SampleMap.put(fileItem.getFieldName(), fileName);  
+						SampleMap.put(fileItem.getFieldName(), fileName);
 						File uploadFile = new File(currentDirPath + "\\" + fileName);
 						fileItem.write(uploadFile);
 
@@ -96,7 +106,7 @@ public class Servlet extends HttpServlet {
 				} // end if
 			} // end for
 		} catch (Exception e) {
-			//TODO: handle exception
+			// TODO: handle exception
 		}
 
 		return null;
