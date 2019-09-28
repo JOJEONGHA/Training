@@ -45,28 +45,37 @@ public class Servlet extends HttpServlet {
 	protected void doHandler(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String nextPage = "";
+		int extra_int = 1;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String action = request.getPathInfo();
 		try {
 			List<SampleVO> list = new ArrayList<>();
-			if (action == "/" || action == "/list") {
+			if(action == null || action.equals("/listsample.do")){
+				list = service.listSample();
+				request.setAttribute("listSample", list);
+				nextPage = "/upload/listSample.jsp";
+			}
+			else if (action.equals("/formsample.do")) {
+				list = service.listSample();
+				extra_int = service.extraction_int();
+				request.setAttribute("listSampe",list);
+				request.setAttribute("extranum",extra_int);
+				nextPage = "/upload/formSample.jsp";
+			}else if(action.equals("/addsample.do")) {
 				Map<String, String> SampleMap = upload(request, response);
-				int num = vo.getNum();
-				String sample = vo.getSample();
-				String imageFileName = vo.getImageFileName();
+				int num = (int)request.getAttribute("extranum");
+				String title = SampleMap.get("title");
+				String imageFileName = SampleMap.get("imageFileName");
 
 				vo.setNum(num);
-				vo.setSample(sample);
+				vo.setSample(title);
 				vo.setImageFileName(imageFileName);
 				service.addSample(vo);
-				nextPage = "";
-			}else if(action == "/" || action == "/list") {
-				
+				nextPage = "/upload/listsample.do";
 			}
 			
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/upload/sampleList.do");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -9,15 +9,17 @@ class SampleService {
     }
 
 	public void addSample(SampleVO vo) {
+		dao.insertNewSample(vo);
     }
 
-	public List<SampleVO> listArticles() {
-		List<SampleVO> list = dao.selectAllArticles();
+	public List<SampleVO> listSample() {
+		List<SampleVO> list = dao.selectAllSamples();
 		return list;
 	}
-	
-	public void addArticle(SampleVO vo){
-		dao.insertNewArticle(vo);		
+
+	public int extraction_int(){
+		int result = dao.extraction_num();
+		return result;
 	}
 
 }

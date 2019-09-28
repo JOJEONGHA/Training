@@ -30,7 +30,7 @@
 			<td>파일제목</td>
 		</tr>
 		<c:choose>
-			<c:when test="${articlesList ==null }">
+			<c:when test="${listSample ==null }">
 				<tr height="10">
 					<td colspan="4">
 						<p align="center">
@@ -39,34 +39,19 @@
 					</td>
 				</tr>
 			</c:when>
-			<c:when test="${articlesList !=null }">
-				<c:forEach var="article" items="${articlesList }"
+			<c:when test="${listSample !=null }">
+				<c:forEach var="list" items="${listSample}"
 					varStatus="articleNum">
 					<tr align="center">
-						<td width="5%">${articleNum.count}</td>
-						<td width="10%">${article.id }</td>
-						<td align='left' width="35%"><span
-							style="padding-right: 30px"></span> <c:choose>
-								<c:when test='${article.level > 1 }'>
-									<c:forEach begin="1" end="${article.level }" step="1">
-										<span style="padding-left: 10px"></span>
-									</c:forEach>
-									<span style="font-size: 12px;">[답변]</span>
-									<a class='cls1'
-										href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
-								</c:when>
-								<c:otherwise>
-									<a class='cls1'
-										href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
-								</c:otherwise>
-							</c:choose></td>
-						<td width="10%"><fmt:formatDate value="${article.writeDate}" /></td>
+						<td width="5%">${list.num}</td>
+						<td width="10%">${list.title}</td>
+						<td width="10%">${list.imageFileName}</td>
 					</tr>
 				</c:forEach>
 			</c:when>
 		</c:choose>
 	</table>
-	<a class="cls1" href="${contextPath}/board/articleForm.do"><p
-			class="cls2">글쓰기</p></a>
+	<a class="cls1" href="${contextPath}/upload/addSample.do">
+	<p class="cls2">글쓰기</p></a>
 </body>
 </html>
