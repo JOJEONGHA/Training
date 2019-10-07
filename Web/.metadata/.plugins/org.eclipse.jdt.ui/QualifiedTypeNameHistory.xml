@@ -6,4 +6,7 @@
 <fullyQualifiedTypeName name="org.springframework.core.io.FileSystemResource"/>
 <fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="service.MemberService"/>
+<fullyQualifiedTypeName name="controller.MemberController"/>
+<fullyQualifiedTypeName name="vo.MemberVO"/>
 </qualifiedTypeNameHistroy>

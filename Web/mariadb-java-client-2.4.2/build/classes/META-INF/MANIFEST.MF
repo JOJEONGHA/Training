@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.mariadb.jdbc
+Bundle-SymbolicName: org.mariadb.jdbc
+Export-Package: org.mariadb.jdbc
+Bundle-Name: mariadb-java-client
+Bundle-Version: 2.4.2
+Bundle-ManifestVersion: 2
+Import-Package: javax.naming, javax.management, javax.net;resolution:=
+ optional, javax.net.ssl;resolution:=optional, javax.sql, javax.transa
+ ction.xa;resolution:=optional, waffle.windows.auth;resolution:=option
+ al, waffle.windows.auth.impl;resolution:=optional, *
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.4.0
+
